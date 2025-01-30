@@ -1,2 +1,2 @@
-# TechnicalTest
-Template for facilitate Technnical Test
+# franki-technicalTest
+Technical test for Franki app
