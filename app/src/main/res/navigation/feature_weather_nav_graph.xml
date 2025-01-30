@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/feature_weather_nav_graph"
+    app:startDestination="@id/weatherFragment">
+
+    <fragment
+        android:id="@+id/weatherFragment"
+        android:name="com.technicalTest.feature_weather.presentation.WeatherFragment"
+        android:label="fragment_weather"
+        tools:layout="@layout/fragment_weather">
+        <action
+            android:id="@+id/action_to_forecast_weather"
+            app:destination="@id/cityForecastFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cityForecastFragment"
+        android:name="com.technicalTest.feature_weather.presentation.CityForecastFragment"
+        android:label="fragment_city_forecast"
+        tools:layout="@layout/fragment_city_forecast">
+        <argument
+            android:name="cityWeather"
+            app:argType="com.technicalTest.feature_weather.domain.model.CityWeather" />
+    </fragment>
+
+</navigation>
