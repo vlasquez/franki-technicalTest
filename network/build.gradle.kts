@@ -1,32 +1,41 @@
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt.android)
 }
 
 android {
-    namespace = "com.technicalTest.api"
+    namespace = "com.technicaltest.network"
     compileSdk = 34
 
     defaultConfig {
         minSdk = 24
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "WEATHER_API_KEY", "\"${System.getenv("WEATHER_API_KEY")}\"")
-        buildConfigField("String", "APPLICATION_ID", "\"${System.getenv()["APPLICATION_ID"]}\"")
-        buildConfigField("String", "MASTER_KEY", "\"${System.getenv()["MASTER_KEY"]}\"")
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
         debug {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"https://api.themoviedb.org/\""
+            )
+
+            buildConfigField(
+                "String",
+                "API_KEY",
+                System.getenv("MOVIES_API_KEY") ?: "\"d9066ec7feb9e1c8f7bfc4f7fa63f6e7\""
             )
         }
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -34,30 +43,29 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_9
+        targetCompatibility = JavaVersion.VERSION_1_9
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_9.toString()
     }
-    buildFeatures {
-        buildConfig = true
+
+    kapt {
+        correctErrorTypes = true
     }
 }
 
 dependencies {
-
-    /** RETROFIT **/
-    implementation(libs.retrofit)
-    implementation(libs.gson)
-    implementation(libs.logging.interceptor)
     implementation(libs.okhttp)
+    api(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.logging.interceptor)
+    api(libs.gson)
 
-    /** HILT **/
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
-    /** UNIT TEST**/
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }
