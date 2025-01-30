@@ -25,3 +25,4 @@ include(":design-system")
 include(":utils")
 
 include(":network")
+include(":feature-weather")

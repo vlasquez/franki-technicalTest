@@ -25,14 +25,12 @@ android {
             buildConfigField(
                 "String",
                 "BASE_URL",
-                "\"https://api.themoviedb.org/\""
+                "\"https://api.openweathermap.org\""
             )
 
-            buildConfigField(
-                "String",
-                "API_KEY",
-                System.getenv("MOVIES_API_KEY") ?: "\"d9066ec7feb9e1c8f7bfc4f7fa63f6e7\""
-            )
+            buildConfigField("String", "WEATHER_API_KEY", "\"${System.getenv("WEATHER_API_KEY")}\"")
+            buildConfigField("String", "APPLICATION_ID", "\"${System.getenv()["APPLICATION_ID"]}\"")
+            buildConfigField("String", "MASTER_KEY", "\"${System.getenv()["MASTER_KEY"]}\"")
         }
         release {
             isMinifyEnabled = false
