@@ -6,6 +6,6 @@ import javax.inject.Inject
 
 internal class GetWeatherInfo @Inject constructor(private val weatherRepository: CityWeatherRepository) {
 
-    suspend operator fun invoke(): List<CityWeather> =
-        weatherRepository.getCitiesWeather()
+    suspend operator fun invoke(location: String): Result<CityWeather> =
+        weatherRepository.getWeatherByLocation(location = location)
 }

@@ -4,5 +4,5 @@ import com.technicalTest.feature_weather.domain.model.CityWeather
 
 internal interface CityWeatherRepository {
 
-    suspend fun getCitiesWeather(): List<CityWeather>
+    suspend fun getWeatherByLocation(location: String): Result<CityWeather>
 }

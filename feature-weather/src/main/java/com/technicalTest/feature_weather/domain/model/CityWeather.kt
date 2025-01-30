@@ -6,8 +6,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class CityWeather(
     val capitalName: String,
-    val stateName: String,
-    val stateCode: String,
     val cityCoordinates: Coordinates,
     val weather: Weather,
     val requestTimestamp: Int,

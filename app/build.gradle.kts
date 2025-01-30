@@ -67,6 +67,7 @@ dependencies {
 
     implementation(project(":design-system"))
     implementation(project(":network"))
+    implementation(project(":feature-weather"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

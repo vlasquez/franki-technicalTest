@@ -10,13 +10,12 @@ internal class WeatherRemoteDataSource @Inject constructor(
 
     override suspend fun getWeatherByCity(
         city: String,
-        state: String
     ): Result<CityWeatherResponse> {
-        return weatherApi.getWeatherByCity(getQuery(city, state))
+        return weatherApi.getWeatherByCity(getQuery(city))
     }
 
-    private fun getQuery(city: String, state: String): String =
-        "$city,$state,$COUNTRY_CODE"
+    private fun getQuery(city: String): String =
+        "$city,$COUNTRY_CODE"
 
     companion object {
         private const val COUNTRY_CODE = "US"

@@ -1,6 +1,5 @@
 package com.technicalTest.feature_weather.data.remote.mapper
 
-import com.technicalTest.feature_weather.data.source.remote.model.CapitalResponse
 import com.technicalTest.feature_weather.data.remote.model.CityWeatherResponse
 import com.technicalTest.feature_weather.data.remote.model.CoordinatesResponse
 import com.technicalTest.feature_weather.data.remote.model.MainTempResponse
@@ -8,19 +7,16 @@ import com.technicalTest.feature_weather.domain.model.CityWeather
 import com.technicalTest.feature_weather.domain.model.Coordinates
 import com.technicalTest.feature_weather.domain.model.Temperature
 import com.technicalTest.feature_weather.domain.model.Weather
-import com.technicalTest.feature_weather.ext.toDegrees
+import com.technicalTest.feature_weather.util.toDegrees
 import javax.inject.Inject
 
 class WeatherMapper @Inject constructor() {
     fun transformCityWeather(
-        capitalResponse: CapitalResponse,
         weatherResponse: CityWeatherResponse
     ): CityWeather {
 
         return CityWeather(
             capitalName = weatherResponse.name,
-            stateName = capitalResponse.stateName,
-            stateCode = capitalResponse.getStateCode(),
             requestTimestamp = weatherResponse.requestTimestamp,
             cityCoordinates = transformCoordinates(weatherResponse.coordinatesResponse),
             weather = transformWeather(weatherResponse)
