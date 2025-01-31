@@ -2,11 +2,10 @@ package com.technicalTest.feature_weather.presentation.compose
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -22,18 +21,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.material.fade
-import com.google.accompanist.placeholder.placeholder
 import com.technicalTest.design_system.theme.AppTypography
 import com.technicalTest.design_system.theme.Layout
-import com.technicalTest.design_system.theme.placeholderLight
+import com.technicalTest.design_system.theme.secondaryLight
 import com.technicalTest.design_system.theme.surfaceLight
 import com.technicalTest.feature_weather.R
 import com.technicalTest.feature_weather.domain.model.CityWeather
-import com.technicalTest.feature_weather.domain.model.Coordinates
-import com.technicalTest.feature_weather.domain.model.Temperature
-import com.technicalTest.feature_weather.domain.model.Weather
 import com.technicalTest.feature_weather.presentation.WeatherViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -46,7 +39,6 @@ internal fun WeatherView(modifier: Modifier = Modifier) {
 
     when (viewState) {
         is WeatherViewModel.ViewState.Loading, WeatherViewModel.ViewState.Refreshing -> {
-            WeatherPlaceholder()
         }
 
         is WeatherViewModel.ViewState.WeatherLoaded -> {
@@ -95,7 +87,11 @@ fun CityWeatherView(
         )
         Button(
             onClick = { onCityWeatherClicked(cityName.value) },
-            modifier = Modifier.padding(top = Layout.Spacing.Small.L)
+            modifier = Modifier.padding(top = Layout.Spacing.Small.L),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = secondaryLight,
+                contentColor = surfaceLight
+            )
         ) {
             Text("Get Weather")
         }
@@ -109,29 +105,5 @@ fun CityWeatherView(
             )
         }
     }
-}
-
-@Composable
-private fun WeatherPlaceholder() {
-    val weatherModelUi =
-        CityWeather(
-            capitalName = "",
-            cityCoordinates = Coordinates(0.0, 0.0),
-            Weather(
-                "",
-                "",
-                0,
-                Temperature(
-                    0.0,
-                    "",
-                    0,
-                    "",
-                    "",
-                    ""
-                ),
-                ""
-            ),
-            0
-        )
 }
 

@@ -45,7 +45,6 @@ fun WeatherItemView(
     Card(
         modifier = (placeholderModifier ?: Modifier)
             .height(Layout.Spacing.Large.L)
-            .padding(Layout.Spacing.Small.S)
             .fillMaxWidth(),
         shape = RoundedCornerShape(12),
     ) {

@@ -15,29 +15,29 @@ internal class WeatherViewModel @Inject constructor(
     private val getWeatherInfo: GetWeatherInfo
 ) : ViewModel() {
     private val _viewState = MutableStateFlow<ViewState>(ViewState.Loading)
-
     val viewState: StateFlow<ViewState> get() = _viewState
-    var currentLocation: String? = null
+
+    private var currentLocation: String? = null
 
     fun getWeatherByLocation(location: String) {
         viewModelScope.launch {
-            currentLocation = location
-            getWeatherInfo(location).onSuccess {
-                _viewState.value = ViewState.WeatherLoaded(it)
-            }.onFailure {
-                _viewState.value = ViewState.WeatherError(it.message)
+            if (location.isNotEmpty()) {
+                currentLocation = location
+                getWeatherInfo(location).onSuccess {
+                    _viewState.value = ViewState.WeatherLoaded(it)
+                }.onFailure {
+                    _viewState.value = ViewState.WeatherError(it.message)
+                }
+            } else {
+                _viewState.value = ViewState.WeatherError("Location is empty")
             }
         }
     }
 
-    fun refreshWeather() {
-        _viewState.value = ViewState.Refreshing
-        currentLocation?.let { getWeatherByLocation(it) }
-    }
 
     sealed class ViewState {
-        object Loading : ViewState()
-        object Refreshing : ViewState()
+        data object Loading : ViewState()
+        data object Refreshing : ViewState()
         data class WeatherLoaded(val cityWeather: CityWeather) : ViewState()
         data class WeatherError(val message: String?) : ViewState()
     }
