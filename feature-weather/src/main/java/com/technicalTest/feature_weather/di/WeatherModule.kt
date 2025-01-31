@@ -34,7 +34,7 @@ internal abstract class WeatherModule {
         @Singleton
         @Provides
         fun providesWeatherApi(
-            @Named("WeatherRetrofit") retrofit: Retrofit
+           retrofit: Retrofit
         ): WeatherApi = retrofit.create(WeatherApi::class.java)
     }
 }
