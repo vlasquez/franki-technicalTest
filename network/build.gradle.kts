@@ -28,21 +28,9 @@ android {
                 "\"https://api.openweathermap.org\""
             )
 
-            buildConfigField(
-                "String",
-                "WEATHER_API_KEY",
-                System.getenv("WEATHER_API_KEY") ?: "\"1f6ca21456731b9de44ce0ea03c478d0\""
-            )
-            buildConfigField(
-                "String",
-                "APPLICATION_ID",
-                System.getenv()["APPLICATION_ID"] ?: "\"6a2NWTwXRlwc1BynCf46kYZG1VeWp170GYjZIeXK\""
-            )
-            buildConfigField(
-                "String",
-                "MASTER_KEY",
-                System.getenv()["MASTER_KEY"] ?: "\"WEYdiGWSz0gt91skfDe03wX9yqikQTpiVc9Vn2An\""
-            )
+            buildConfigField("String", "WEATHER_API_KEY", "\"${System.getenv("WEATHER_API_KEY")}\"")
+            buildConfigField("String", "APPLICATION_ID", "\"${System.getenv()["APPLICATION_ID"]}\"")
+            buildConfigField("String", "MASTER_KEY", "\"${System.getenv()["MASTER_KEY"]}\"")
         }
         release {
             isMinifyEnabled = false
