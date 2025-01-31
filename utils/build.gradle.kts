@@ -39,6 +39,9 @@ dependencies {
     implementation(libs.material)
     testImplementation(libs.junit)
     testImplementation(libs.roboletric)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.androidx.core.testing)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 

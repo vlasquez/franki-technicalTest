@@ -56,12 +56,14 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     testImplementation(libs.junit.junit)
+    testImplementation(project(":utils"))
     kapt(libs.hilt.compiler)
 
     implementation(project(":network"))
     implementation(project(":design-system"))
 
     testImplementation(libs.junit)
+    testImplementation(project(":utils"))
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     testImplementation(libs.kotlin.coroutines.test)

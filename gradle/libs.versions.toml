@@ -30,6 +30,8 @@ timberVersion = "5.0.1"
 accompanishVersion = "0.28.0"
 coilComposeVersion = "2.2.2"
 junitJunit = "4.12"
+coreTestingVersion = "2.2.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -76,6 +78,9 @@ mockk-agent = { group = "io.mockk", name = "mockk-agent", version.ref = "mockkVe
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbineVersion" }
 roboletric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectricVersion" }
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timberVersion" }
+androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTestingVersion" }
+
+
 junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
 
 [plugins]
