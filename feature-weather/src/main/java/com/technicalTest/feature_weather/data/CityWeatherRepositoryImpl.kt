@@ -16,4 +16,16 @@ internal class CityWeatherRepositoryImpl @Inject constructor(
             weatherMapper.transformCityWeather(it)
         }
 
+    override suspend fun getForecastWeatherByLocation(
+        lat: Double,
+        lon: Double
+    ): Result<List<CityWeather>> {
+       return weatherRemoteDataSource.getForecastWeatherByLocation(
+            lat = lat, lon = lon
+        ).map { weatherForecastList ->
+           weatherForecastList.list.map {
+                weatherMapper.transformCityWeather(it)
+            }
+       }
+    }
 }

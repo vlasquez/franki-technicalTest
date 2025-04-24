@@ -43,6 +43,11 @@ internal fun WeatherView(modifier: Modifier = Modifier) {
 
         is WeatherViewModel.ViewState.WeatherLoaded -> {
             cityWeather.value = (viewState as WeatherViewModel.ViewState.WeatherLoaded).cityWeather
+            if ((viewState as WeatherViewModel.ViewState.WeatherLoaded).cityWeatherForecast != null) {
+                println(
+                    (viewState as WeatherViewModel.ViewState.WeatherLoaded).cityWeatherForecast?.size
+                )
+            }
         }
 
         is WeatherViewModel.ViewState.WeatherError -> {
